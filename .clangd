@@ -1,0 +1,28 @@
+CompileFlags:
+  Add:
+    - -std=c23
+    - -Wall
+    - -Wextra
+    - -Wpedantic
+    - -Werror
+    - -O2
+    - -I../include
+  Remove:
+    - -W*
+
+Diagnostics:
+  ClangTidy:
+    Add:
+      - modernize-*
+      - bugprone-*
+      - performance-*
+      - readability-*
+    Remove:
+      - modernize-use-trailing-return-type
+      - readability-magic-numbers
+
+Index:
+  Background: Build
+
+Style:
+  FullyQualifiedNamespaces: No

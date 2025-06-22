@@ -1,0 +1,12 @@
+[
+  {
+    "directory": "/home/ajay57/Projects/c/interpretor",
+    "command": "gcc -c src/main.c -o bin/obj/main.c.o -Iinclude -std=c23 -Wall -Wextra -O2",
+    "file": "src/main.c"
+  },
+  {
+    "directory": "/home/ajay57/Projects/c/interpretor",
+    "command": "gcc -c src/lexer.c -o bin/obj/lexer.c.o -Iinclude -std=c23 -Wall -Wextra -O2",
+    "file": "src/lexer.c"
+  }
+]
