@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 
+#include "ast.h"
 #include "lexer.h"
+#include "parser.h"
 #include "token.h"
 
 void print_token(Token tok) {
@@ -31,15 +34,43 @@ void print_token(Token tok) {
     printf("Token(Type: %s, Value: '%s')\n", type_str, tok.value ? tok.value : "null");
 }
 
-int main(int argc, char *argv[]) {
+void print_ast(ASTNode *node) {
+    if (node == nullptr) {
+        printf("null node");
+        return;
+    }
+
+    if (node->type == AST_INFIX_EXPRESSION) {
+        InfixExpression *infix = (InfixExpression *)node;
+        printf("(");
+        print_ast(infix->left);
+        printf(" %s ", infix->token.value);
+        print_ast(infix->right);
+        printf(" %s ", infix->token.value);
+        printf(")");
+    } else if (node->type == AST_INTEGER_LITERAL) {
+        IntegerLiteral *integer = (IntegerLiteral *)node;
+        printf("%ld", integer->value);
+    } else {
+        printf("Unknown node");
+    }
+}
+
+int main() {
     const char *input = "10 + 25 - 5 * 39 / 21";
     Lexer *lexer = new_lexer(input);
-    printf("Lexing input: \"%s\"\n", input);
-    Token tok;
+    Parser *parser = new_parser(lexer);
+    printf("Parsing input: \"%s\"\n", input);
+    ASTNode *expression = parse_expression(parser);
 
-    do {
-        tok = get_next_token(lexer);
-        print_token(tok);
-    } while (tok.type != TOKEN_EOF);
+    if (expression) {
+        printf("Generated AST");
+        print_ast(expression);
+        printf("\n");
+    } else {
+        printf("Failed to parse expression. \n");
+    }
+    free(lexer);
+    free(parser);
     return 0;
 }

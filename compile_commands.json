@@ -1,6 +1,11 @@
 [
   {
     "directory": "/home/ajay57/Projects/c/interpretor",
+    "command": "gcc -c src/parser.c -o bin/obj/parser.c.o -Iinclude -std=c23 -Wall -Wextra -O2",
+    "file": "src/parser.c"
+  },
+  {
+    "directory": "/home/ajay57/Projects/c/interpretor",
     "command": "gcc -c src/main.c -o bin/obj/main.c.o -Iinclude -std=c23 -Wall -Wextra -O2",
     "file": "src/main.c"
   },
